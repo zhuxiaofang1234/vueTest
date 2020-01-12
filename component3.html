@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件传值</title>
+</head>
+<body>
+<div id="root">
+    <counter :count="2" @inc="handleInc"></counter>
+    <counter :count="3" @inc="handleInc"></counter>
+    <div>{{total}}</div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //写一个局部组件
+    var counter = {
+        props:['count'],
+        data:function (){
+          return {
+              number:this.count
+          }
+        },
+        template:'<div @click="handleClick">{{number}}</div>',
+        methods:{
+            handleClick:function(){
+                this.number ++;
+                this.$emit('inc',1)
+            }
+        }
+    };
+    var vm = new Vue({
+        el:'#root',
+        data:{
+            total:5
+        },
+        methods:{
+            handleInc:function(step){
+                this.total+=step
+            }
+        },
+        components:{
+            counter
+        }
+    });
+
+</script>
+</html>

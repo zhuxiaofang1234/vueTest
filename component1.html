@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件使用细节--ref--操作dom</title>
+</head>
+<body>
+<div id="root">
+    <div ref="hello" @click="handleClick">hello world</div>
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    /**点击hello world 获取div上对应的text,即hello world**/
+    var vm = new Vue({
+        el: '#root',
+        methods:{
+            handleClick:function(){
+                console.log(this.$refs.hello.innerHTML)
+                alert('click');
+            }
+        }
+    });
+</script>
+</html>
